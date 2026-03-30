@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>CardObj</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        input[type="range"] {
+            width: 200px;
+        }
+        .setting{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body class="w-100 my-5">
+
+    
+
+    <div class="setting">
+        <div><input type="range" name="range" id="range" min="0" max="100" value="0">
+        <h4 id="valueOfRange">Radius : 0</h4></div>
+    </div>
+
+    <div id="show" class="container-fluid">
+        <div class="row g-3 p-3" id="card-container"></div>
+    </div>
+
+</body>
+
+</html>
+<script>
+
+    const people = [
+        { id: 101, name: "Yan Phayu",    sex: "Male",   img: "img2.jpg" },
+        { id: 102, name: "Yan Vanak",    sex: "Male",   img: "img3.jpg" },
+        { id: 103, name: "Yan Oufy",     sex: "Male",   img: "img4.jpg" },
+        { id: 104, name: "Yan Seavnean", sex: "Female", img: "img5.jpg" },
+        { id: 105, name: "Yan Xiao",     sex: "Male",   img: "img6.jpg" },
+        { id: 106, name: "Yan Yunyun",   sex: "Female", img: "img7.jpg" },
+        { id: 107, name: "Yan Fengly",   sex: "Male",   img: "img8.jpg" },
+        { id: 108, name: "Yan Fongley",  sex: "Female", img: "img9.jpg" }
+    ];
+
+    let show = ``;
+
+    people.forEach((person) => {
+        show += `
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100 p-0">
+                    <img class="card-img-top box"  style="width: 100%;" src="${person.img}">
+                    <div class="mt-2 w-100 p-2">
+                        <h4 class="fw-bold">${person.name}</h4>
+                        <h5 class="fw-medium">${person.sex}</h5>
+                        <button class="btn btn-primary w-100">View</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    document.getElementById("card-container").innerHTML = show;
+
+    const range = document.getElementById("range");
+    const value = document.getElementById("valueOfRange");
+
+    range.addEventListener('input', () => {
+            const allBoxes = document.querySelectorAll(".box");
+            allBoxes.forEach((box) => {
+                box.style.borderRadius = `${range.value / 2}%`;
+            });
+            value.textContent = `Radius : ${range.value}`;
+        });
+
+</script>
